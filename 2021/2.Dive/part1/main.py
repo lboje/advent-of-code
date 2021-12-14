@@ -10,7 +10,6 @@ Starting from 0,0 we determine our endpoint using the directions from input.txt
 import os
 
 vertical = ['up', 'down']
-horizontal = ['forward']
 
 #For advent of code purposes, the file is always there and correctly formatted
 def getFile(fileName):
