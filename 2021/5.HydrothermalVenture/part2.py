@@ -1,5 +1,6 @@
 """
 Given a list of coordinates indicating line segments in input.txt, measure overlapping points
+This time we believe in diags
 
 input.txt format: 
 
@@ -7,7 +8,7 @@ x1, y1 -> x2, y2
 x3, y3 -> x4, y4
 ...
 
-Finished 
+Finished 12/14/2021
 """
 from io import TextIOWrapper
 import os
@@ -28,10 +29,12 @@ def getFile(fileName, size):
 #Get all points on a line
 def getPoints(pos1, pos2):
     coords = []
+    
     (x1, y1) = tuple(int(i) for i in pos1.split(','))
     (x2, y2) = tuple(int(i) for i in pos2.split(','))
     #its simpler this way
     (x1, y1), (x2, y2) = sorted([(x1, y1), (x2, y2)])
+    
 
     #These are our horizontal or vertical lines. The easy ones
     if (x1 == x2) or (y1 == y2):
@@ -42,7 +45,21 @@ def getPoints(pos1, pos2):
         for x in range(left, right + 1):
             for y in range(up, down + 1):
                 coords.append((x, y))
+    else: 
+        dx = x2 - x1
+        dy = y2 - y1
 
+        #you know y = mx + b? 
+        #heres m
+        slope = int(dy/dx)
+
+        #b is y1 (we'll call it y for clarity)
+        y = y1 
+        #this is why its better if we can sort it
+        for x in range(x1, x2 + 1):
+            coords.append((x, y))
+            y += slope
+    
     return coords
     
 """
