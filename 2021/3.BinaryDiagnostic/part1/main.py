@@ -3,6 +3,7 @@ Reads from an input.txt file. Input.txt is binary - surprise!
 Calculate the gamma (the most common value for each bit) and
 the epsilon (inverse)
 We then multiply them :)
+Finished 12/13/2021
 """
 import os
 from collections import Counter

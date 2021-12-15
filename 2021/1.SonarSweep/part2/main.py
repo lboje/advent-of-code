@@ -6,6 +6,7 @@ Then, we determine how many times the values on that array increase as we iterat
 ex: arr[1] > arr[0]
 
 This is not the most efficient way of doing this, by any means.
+Finished 12/13/2021
 """
 import os
 

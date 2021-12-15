@@ -1,6 +1,7 @@
 """
 Reads from an input.txt file. Input.txt is integers separated by line breaks.
 We keep track of how many times the input value increased from its previous value
+Finished 12/13/2021
 """
 import os
 

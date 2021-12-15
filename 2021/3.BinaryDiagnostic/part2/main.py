@@ -2,6 +2,7 @@
 Reads from an input.txt file. Input.txt is binary - surprise!
 We can recursively filter on most common bit to find the oxygen generator rating.
 Ditto but inverse for co2 scrubber rating.
+Finished 12/13/2021
 """
 import os
 from collections import Counter

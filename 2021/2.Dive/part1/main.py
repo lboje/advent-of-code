@@ -6,6 +6,7 @@ ex: forward 4
     down 2
 
 Starting from 0,0 we determine our endpoint using the directions from input.txt
+Finished 12/13/2021
 """
 import os
 

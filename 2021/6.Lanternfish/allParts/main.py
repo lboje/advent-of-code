@@ -1,6 +1,7 @@
 """
 Reads from an input.txt file. Input.txt a csv of integers
 Calculate the number of lanternfish given specific rules.
+Finished 12/14/2021
 """
 import os
 import csv
