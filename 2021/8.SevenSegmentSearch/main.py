@@ -50,8 +50,7 @@ def getFile(fileName):
 
 
 
-#if there is only one 
-#display is a string
+#if there is only one number with that number of segments, its immediately identifiable
 def immediatelyIdentifiable(display):
     return len(lengthBuckets[len(display)]) == 1
 
