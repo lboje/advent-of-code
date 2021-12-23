@@ -13,30 +13,47 @@ ex.
 <{([{{}}[<[[[<>{}]]]>[]]
 
 parse the syntax
+
+Completed 12/22/21
 """
 
 import os
+from bidict import bidict
+import statistics
+
 
 
 """
 Mapping of an unexpected character to its associated score
 """
-scoreMap = {
+unexpectedScore = {
     ')': 3,
     ']': 57,
     '}': 1197,
     '>': 25137
 }
 
+
+"""
+Mapping of autocompleted character to its associated score
+"""
+autocompleteScore = {
+    ')': 1,
+    ']': 2,
+    '}': 3,
+    '>': 4 
+}
+
 """
 Mapping of an end character to its starting character
 """
-closureMap = {
+
+closureMap = bidict({
     ')': '(',
     ']': '[',
     '}': '{',
     '>': '<'
-}
+})
 
 
 #For advent of code purposes, the file is always there and correctly formatted
@@ -63,25 +80,42 @@ def parseLine(line):
         else:
             #This indicates an unexpected expression
             if not openExpr or openExpr.pop() != closureMap[char]:
-                return scoreMap[char]
-    return 0
+                return (unexpectedScore[char], False)
+    return ([closureMap.inverse[char] for char in reversed(openExpr)], True)
 
+
+"""
+Calculate the completion score for completion phrase
+Start with 0. Then, for each character, multiply sum by 5, then add 
+the associated value for that character
+"""
+def completionScore(completionList):
+    sum = 0
+    for char in completionList:
+        sum = (sum * 5) + autocompleteScore[char]
+    return sum
 
 """
 Line by line, check whether or not a line is valid. 
-Return the sum of the values of unexpected characters
+Return the sum of the values of unexpected characters,
+as well as the median value of autocomplete values
 """
 def parseFile(inputTxt):
-    sum = 0
+    unexpectedSum = 0
+    autocompleteSum = []
     for line in inputTxt:
-        sum += parseLine(line)
-    return sum
+        (value, valid) = parseLine(line)
+        if valid:
+            autocompleteSum.append(completionScore(value))
+        else:
+            unexpectedSum += value
+    return (unexpectedSum, statistics.median(autocompleteSum))
 
 
 def main():
     inputTxt = getFile("input.txt") 
-    partOneAnswer = parseFile(inputTxt)
-    print(partOneAnswer)
+    (partOne, partTwo) = parseFile(inputTxt)
+    print("Part one answer: {0}\nPart two answer: {1}".format(partOne, partTwo))
     
 
 
