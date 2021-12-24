@@ -5,8 +5,9 @@ description = "2021 Advent of Code (in python)"
 authors = ["Lucas Boje <lucasaboje@gmail.com>"]
 
 [tool.poetry.dependencies]
-python = "^3.10"
+python = ">=3.10,<3.11"
 bidict = "^0.21.4"
+numpy = "^1.21.5"
 
 [tool.poetry.dev-dependencies]
 
