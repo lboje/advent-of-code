@@ -13,7 +13,11 @@ ex.
 5283751526
 
 Each integer represents the energy level of an octopus at that zone.
-Given the rules for determining a flash, 
+Given the rules for determining a flash
+1: figure out how many flashed occur in 100 days 
+2: figure out when the flashes synchronize
+
+Finished 12/23/21
 """
 
 import numpy as np
@@ -97,13 +101,26 @@ def iterateDays(octopuses, neighbors, n):
 
     return totalFlashes
 
+"""
+Need to figure out when everything is the same.
+We've already had 100 days
+"""
+def findSynchronizationPoint(octopuses, neighbors):
+    day = 100
+    synched = False
+
+    while not synched:
+        day += 1
+        flashed = iterateDay(octopuses, neighbors)
+        synched = (flashed == octopuses.size)
+    return day 
+
 def main():
     octopuses = getFile("input.txt") 
     neighborMap = getNeighborMap(octopuses)
     partOne = iterateDays(octopuses, neighborMap, 100)
-    partTwo = 'unknown'
+    partTwo = findSynchronizationPoint(octopuses, neighborMap)
     
-        
     print("Part one answer: {0}\nPart two answer: {1}".format(partOne, partTwo))
     
 
