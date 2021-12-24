@@ -1,23 +1,31 @@
 """
-Input file is to be interpreted as lines of single digit integers
+Input file lines of coordinates, then directions
 ex.
-5483143223
-2745854711
-5264556173
-6141336146
-6357385478
-4167524645
-2176841721
-6882881134
-4846848554
-5283751526
+6,10
+0,14
+9,10
+0,3
+10,4
+4,11
+6,0
+6,12
+4,1
+0,13
+10,12
+3,4
+3,0
+8,4
+1,10
+2,14
+8,10
+9,0
 
-Each integer represents the energy level of an octopus at that zone.
-Given the rules for determining a flash
-1: figure out how many flashed occur in 100 days 
-2: figure out when the flashes synchronize
+fold along y=7
+fold along x=5
 
-Finished 12/23/21
+Plot them out, fold on the stated lines.
+
+Finished 12/24/21
 """
 
 from paper import Paper, foldDirection
