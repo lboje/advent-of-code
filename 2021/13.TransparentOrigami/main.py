@@ -61,8 +61,9 @@ def getFile(fileName):
 
 def main():
     (paper, commands) = getFile("input.txt") 
-    paper.fold(commands[0])
-    print(paper.points)
+    for command in commands:
+        paper.fold(command)
+    print(paper)
     
 
 if __name__ == "__main__":
