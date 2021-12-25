@@ -17,6 +17,8 @@ Find the path with lowest weight from top left to bottom right
 
 aw yeah its dijkstra time
 coordinates will be the nodes, values are the edge/weight
+
+Completed 12/24/21
 """
 import os
 import heapq
@@ -29,6 +31,29 @@ def getFile(fileName):
     filePath = os.path.join(os.path.dirname(__file__), fileName)
     cave = np.genfromtxt(filePath, dtype=int, delimiter=1)
     return cave
+
+
+def multiplyInput(inputArr, rowSize, colSize):
+    newInput = inputArr.copy()
+    
+    base = newInput.copy()
+    #first we complete the first row
+    for _ in range(colSize - 1):
+        base += 1
+        base[base > 9] = 1
+        newInput = np.concatenate((newInput, base), axis=1)
+    
+    base = newInput.copy()
+    #then we expand it out
+    for _ in range(rowSize - 1):
+        base += 1
+        base[base > 9] = 1
+        newInput = np.concatenate((newInput, base), axis=0)
+
+    return newInput
+
+
+
 
 #Create a list of the indexes of all neighbors to a given index
 #No diags allowed :(
@@ -86,7 +111,7 @@ def thanksDijkstra(riskArr, neighbors):
 
     #Gonna use heapq to speed things up a bit
     visiting = [(0,0)]
-    #mapping the location to its risk
+    #mapping the a location to the lowest risk to get there
     visited = {(0,0) : 0}
     
     #Do this until we can't
@@ -108,8 +133,15 @@ def thanksDijkstra(riskArr, neighbors):
 def main():
     risk = getFile("input.txt")
     neighbors = getNeighborMap(risk) 
-    lowestRisk = thanksDijkstra(risk, neighbors)
-    print(lowestRisk)
+    partOne = thanksDijkstra(risk, neighbors)
+    
+    #Gotta make the input 25x bigger for part two :(
+    bigRisk = multiplyInput(risk, 5, 5)
+    neighbors = getNeighborMap(bigRisk) 
+    partTwo = thanksDijkstra(bigRisk, neighbors)
+    
+    print("Part one answer: {0}\nPart two answer {1}".format(partOne, partTwo))
+    
 
     
 
