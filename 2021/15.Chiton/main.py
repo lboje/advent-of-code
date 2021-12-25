@@ -19,8 +19,9 @@ aw yeah its dijkstra time
 coordinates will be the nodes, values are the edge/weight
 """
 import os
-import sys
+import heapq
 import numpy as np
+
 
 
 #For advent of code purposes, the file is always there and correctly formatted
@@ -55,21 +56,13 @@ def getNeighbors(idx, shape):
 
 
 #Create a mapping of all indexes to their neighboring indexes
-#As well, we create a distance map that from the starting node to that node
-def getMaps(arr):
+def getNeighborMap(arr):
     #Neighbors to an index
     neighborMap = {}
-    #Distance map
-    distanceMap = {}
-    infinity = sys.maxsize
     for (x, y), _ in np.ndenumerate(arr):
         neighborMap[(x, y)] = getNeighbors((x, y), arr.shape)
-        #This will be remedied later (as part of the algorithim - this isn't a "todo")
-        distanceMap[(x,y)] = infinity
     
-    #The distance from start to itself is 0, actually
-    distanceMap[0,0] = 0
-    return (neighborMap, distanceMap)
+    return neighborMap
 
 
 def searchPath(room, visited):
@@ -86,34 +79,36 @@ def searchPath(room, visited):
     return
 
 
-def thanksDijkstra(riskArr, neighbors, unvisited):
+def thanksDijkstra(riskArr, neighbors):
     (rowSize, colSize) = riskArr.shape
     #This is the bottom right location :)
     goal = (rowSize - 1, colSize - 1)
 
-    visited = {}
-    prev = {} #Mapping from space to the one before it
+    #Gonna use heapq to speed things up a bit
+    visiting = [(0,0)]
+    #mapping the location to its risk
+    visited = {(0,0) : 0}
+    
+    #Do this until we can't
+    while visiting: 
+        closest = heapq.heappop(visiting)
 
-    #Do this until we visit all spots
-    while unvisited: 
-        closest = min(unvisited, key=unvisited.get)
-        
+        #we've found our
+        if closest == goal:
+            return visited[goal]
+
         for neighbor in neighbors[closest]:
-            if neighbor not in visited:
-                currRisk = unvisited[closest] + riskArr[neighbor]
-                if currRisk < unvisited[neighbor]:
-                    unvisited[neighbor] = currRisk
-                    prev[neighbor] = closest
-
-        visited[closest] = unvisited.pop(closest)
-
-    return visited[goal]
+            currRisk = visited[closest] + riskArr[neighbor]
+            #short circuiting is important
+            if neighbor not in visited or currRisk < visited[neighbor]:
+                    heapq.heappush(visiting, neighbor)
+                    visited[neighbor] = currRisk
 
 
 def main():
     risk = getFile("input.txt")
-    (adjacent, shortest) = getMaps(risk) 
-    lowestRisk = thanksDijkstra(risk, adjacent, shortest)
+    neighbors = getNeighborMap(risk) 
+    lowestRisk = thanksDijkstra(risk, neighbors)
     print(lowestRisk)
 
     
