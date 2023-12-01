@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "day-1": "npx tsc src/day-1/main.ts && node src/day-1/main.js",
-    "day-2": "npx tsc src/day-2/main.ts && node src/day-2/main.js"
+    "day-2": "npx tsc src/day-2/main.ts && node src/day-2/main.js",
+    "day-3": "npx tsc src/day-3/main.ts && node src/day-3/main.js"
   },
   "author": "Lucas Boje",
   "license": "ISC",
