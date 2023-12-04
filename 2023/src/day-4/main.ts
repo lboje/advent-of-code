@@ -6,9 +6,7 @@ const port = 3000;
 
 const fileContents = fs.readFileSync('src/day-4/input.txt').toString().split(/\r?\n/);
 
-let partOneTotal = 1;
-
-
+let partOneTotal = 0;
 //List of how many times each card has appeared
 const cardCount = Array<number>(fileContents.length).fill(1);
 
