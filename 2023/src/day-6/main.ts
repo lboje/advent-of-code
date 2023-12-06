@@ -61,7 +61,7 @@ const partOneTotal = (function (){
   let total = 1;
 
   //The first line is structured as follows
-  //Time:        56     97     78     75
+  //Time:    1    2     7
   //So we can do the following to get a number array of the times
   const times = (fileContents[0].split(':'))[1].trim().split(/[ ,]+/).map(time => Number(time));
   //Distances are pretty much the same
