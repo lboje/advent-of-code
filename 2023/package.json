@@ -8,7 +8,9 @@
     "day-1": "npx tsc src/day-1/main.ts && node src/day-1/main.js",
     "day-2": "npx tsc src/day-2/main.ts && node src/day-2/main.js",
     "day-3": "npx tsc src/day-3/main.ts && node src/day-3/main.js",
-    "day-4": "npx tsc src/day-4/main.ts && node src/day-4/main.js"
+    "day-4": "npx tsc src/day-4/main.ts && node src/day-4/main.js",
+    "day-5": "npx tsc src/day-5/main.ts && node src/day-5/main.js",
+    "day-6": "npx tsc src/day-6/main.ts && node src/day-6/main.js"
   },
   "author": "",
   "license": "ISC",
